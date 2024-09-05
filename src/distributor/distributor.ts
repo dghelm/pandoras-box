@@ -106,14 +106,14 @@ class Distributor {
     async calculateRuntimeCosts(): Promise<runtimeCosts> {
         const inherentValue = this.runtimeEstimator.GetValue();
         const baseTxEstimate = await this.runtimeEstimator.EstimateBaseTx();
-        const baseGasPrice = await this.runtimeEstimator.GetGasPrice();
+        const baseGasPrice = (await this.runtimeEstimator.GetGasPrice());
 
         const baseTxCost = baseGasPrice.mul(baseTxEstimate).add(inherentValue);
 
         // Calculate how much each sub-account needs
         // to execute their part of the run cycle.
         // Each account needs at least numTx * (gasPrice * gasLimit + value)
-        const subAccountCost = BigNumber.from(this.totalTx).mul(baseTxCost);
+        const subAccountCost = BigNumber.from(this.totalTx).mul(baseTxCost).mul(10);
 
         // Calculate the cost of the single distribution transaction
         const singleDistributionCost = await this.provider.estimateGas({

@@ -19,6 +19,8 @@ import { StatCollector } from './stats/collector';
 async function run() {
     const program = new Command();
 
+    console.log('dghelm fork')
+
     program
         .name('pandoras-box')
         .description(

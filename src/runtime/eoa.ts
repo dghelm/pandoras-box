@@ -1,5 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import {
+    EtherscanProvider,
     JsonRpcProvider,
     Provider,
     TransactionRequest,
@@ -45,7 +46,8 @@ class EOARuntime {
     }
 
     async GetGasPrice(): Promise<BigNumber> {
-        this.gasPrice = await this.provider.getGasPrice();
+        // this.gasPrice = (await this.provider.getGasPrice());
+        this.gasPrice = BigNumber.from(85700000);
 
         return this.gasPrice;
     }
